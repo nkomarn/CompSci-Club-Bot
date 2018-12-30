@@ -198,8 +198,6 @@ public class Main {
 					guild.getTextChannelById("419247557953454081").sendMessage(Main.rickRoll[i]).queue();
 					guild.getTextChannelById("488165879612178432").sendMessage(Main.rickRoll[i]).queue();
 					sent = sent + 5;
-					guild.getVoiceChannelById("528756932862017557").getManager().setName("Lyrics sent: " + sent).complete();	
-					guild.getVoiceChannelById("528757102936850432").getManager().setName("Elapsed: " + Duration.between(start, Instant.now()).toHours() + " hours").complete();
 					}
 				else {
 					i = 0;
