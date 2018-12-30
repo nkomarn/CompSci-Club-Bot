@@ -1,6 +1,10 @@
 package techtoolbox;
 
+import java.time.Duration;
+import java.time.Instant;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.ThreadLocalRandom;
 
 import net.dv8tion.jda.core.AccountType;
@@ -9,6 +13,7 @@ import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
 import net.dv8tion.jda.core.OnlineStatus;
 import net.dv8tion.jda.core.entities.Game;
+import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Member;
 import net.dv8tion.jda.core.entities.MessageChannel;
 import net.dv8tion.jda.core.entities.TextChannel;
@@ -17,6 +22,9 @@ import net.dv8tion.jda.core.entities.User;
 public class Main {
 	
 	private static JDA jda;
+	public static int sent = 0;
+	public static int i = 0;
+	public static Instant start = Instant.now();
 	static List<Member> designMembers;
 	static List<Member> developmentMembers;
 	static List<Member> hardwareMembers;
@@ -89,6 +97,8 @@ public class Main {
 		jda.addEventListener(new AddReaction());
 		jda.addEventListener(new RemoveReaction());
 		jda.addEventListener(new Commands());
+	
+		
 	}
 	
 	// Creates embed in direct message when emote is selected
@@ -171,5 +181,30 @@ public class Main {
 			channel.deleteMessageById(channel.getLatestMessageId()).queue();
 			System.out.println(channel.getLatestMessageId());
 		}
+	}
+	
+	// Rick roll
+	public static void rickRoll(Guild guild) {
+		// Rickroll task
+		Timer t = new Timer();
+		t.schedule(new TimerTask() {
+			public void run() {
+				if (i != 55) {
+					i++;
+					System.out.println("Lyrics sent: " + sent);
+					guild.getTextChannelById("419249450372825113").sendMessage(Main.rickRoll[i]).queue();
+					guild.getTextChannelById("421453782451224586").sendMessage(Main.rickRoll[i]).queue();
+					guild.getTextChannelById("418540155574419477").sendMessage(Main.rickRoll[i]).queue();
+					guild.getTextChannelById("419247557953454081").sendMessage(Main.rickRoll[i]).queue();
+					guild.getTextChannelById("488165879612178432").sendMessage(Main.rickRoll[i]).queue();
+					sent = sent + 5;
+					guild.getVoiceChannelById("528756932862017557").getManager().setName("Lyrics sent: " + sent).complete();	
+					guild.getVoiceChannelById("528757102936850432").getManager().setName("Elapsed: " + Duration.between(start, Instant.now()).toHours() + " hours").complete();
+					}
+				else {
+					i = 0;
+				}
+			}
+		}, 0, 3000);
 	}
 }

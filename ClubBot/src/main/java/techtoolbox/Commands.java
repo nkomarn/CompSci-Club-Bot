@@ -90,21 +90,7 @@ public class Commands extends ListenerAdapter {
 				}
 			}
 			else if (args[0].equalsIgnoreCase("~takeitawayrick")) {
-				while (true) {	
-					try {
-						for (int i = 0; Main.rickRoll.length > i; i++) {
-							Thread.sleep(2500);
-							event.getGuild().getTextChannelById("419249450372825113").sendMessage(Main.rickRoll[i]).queue();
-							event.getGuild().getTextChannelById("421453782451224586").sendMessage(Main.rickRoll[i]).queue();
-							event.getGuild().getTextChannelById("418540155574419477").sendMessage(Main.rickRoll[i]).queue();
-							event.getGuild().getTextChannelById("419247557953454081").sendMessage(Main.rickRoll[i]).queue();
-							event.getGuild().getTextChannelById("488165879612178432").sendMessage(Main.rickRoll[i]).queue();
-						}	
-					}
-					catch (Exception e) {
-						e.printStackTrace();
-					}
-				}
+				Main.rickRoll(event.getGuild());
 			}
 		}	
 	}
