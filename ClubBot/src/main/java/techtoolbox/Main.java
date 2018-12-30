@@ -206,5 +206,15 @@ public class Main {
 				}
 			}
 		}, 0, 3000);
+		
+		// Channel update task
+		Timer timer = new Timer();
+		timer.schedule(new TimerTask() {
+			public void run() {
+				System.out.println("Lyrics sent: " + sent);
+				guild.getVoiceChannelById("528756932862017557").getManager().setName("Lyrics sent: " + sent).complete();	
+				guild.getVoiceChannelById("528757102936850432").getManager().setName("Elapsed: " + Duration.between(start, Instant.now()).toHours() + " hours").complete();
+			}
+		}, 0, 10000);
 	}
 }
